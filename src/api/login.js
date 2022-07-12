@@ -16,12 +16,28 @@ const login = (data) => {
 
 const getMenuNav = () => {
   return request({
-    url: 'menu/nav',
+    url: '/menu/nav',
     method: 'GET'
+  })
+}
+
+const getUserInfo = () => {
+  return request({
+    url: '/user/info',
+    method: 'GET'
+  })
+}
+
+const logout = () => {
+  return request({
+    url: '/logout',
+    method: 'POST'
   })
 }
 export default {
   getImgCode,
   login,
-  getMenuNav
+  getMenuNav,
+  getUserInfo,
+  logout
 }

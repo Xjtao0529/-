@@ -6,7 +6,7 @@
       <el-form
         :model="ruleForm"
         :rules="rules"
-        ref="from"
+        ref="form"
         class="demo-ruleForm"
       >
         <el-form-item prop="username">
@@ -35,7 +35,7 @@
             <img
               :src="imgCode"
               alt=""
-              @click="getImgCodes"
+              @click.stop="handleCodeRefresh"
               style="width: 80px; margin-left: 10px; border-radius: 5px"
             />
           </div>
@@ -45,7 +45,7 @@
             type="danger"
             style="width: 240px"
             :loading="loadingStatus"
-            @click="handleSubmitLogin"
+            @click="handleVerifyForm"
             >{{ loadingStatus ? '登录中...' : '立即登录' }}</el-button
           >
         </el-form-item>
@@ -63,8 +63,8 @@ export default {
     return {
       loadingStatus: false,
       ruleForm: {
-        username: '',
-        password: '',
+        username: 'duck',
+        password: 'admin888',
         code: '',
         token: ''
       },
@@ -77,12 +77,23 @@ export default {
   },
   methods: {
     ...mapMutations({ setToken: 'user/setToken' }),
+    handleCodeRefresh() {
+      this.loginForm.code = ''
+      this.handleGetCaptcha()
+    },
     async getImgCodes() {
       const res = await loginApi.getImgCode()
       this.imgCode = res.captchaImg
       this.ruleForm.token = res.token
     },
-
+    handleVerifyForm() {
+      this.$refs.form.validate((valid) => {
+        console.log(valid, 'val')
+        if (valid) {
+          this.handleSubmitLogin()
+        }
+      })
+    },
     async handleSubmitLogin() {
       try {
         this.loadingStatus = true
@@ -90,8 +101,7 @@ export default {
         if (!res) return
         this.setToken(res)
         this.$notify({ title: '提示', message: '登录成功', type: 'success' })
-
-        await this.$router.push('/')
+        this.$router.push('/')
       } catch (error) {
         console.log(error)
       } finally {

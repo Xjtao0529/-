@@ -1,9 +1,84 @@
 <template>
-  <div>header</div>
+  <div class="box">
+    <div class="left">left</div>
+    <div class="right">
+      <el-dropdown trigger="click" @command="handleCommand">
+        <span class="el-dropdown-link">
+          <el-avatar
+            :size="30"
+            :src="$store.getters.UserInfo.avatar"
+          ></el-avatar>
+          <h2 style="color: #fff; margin: 0 5px">
+            {{ $store.getters.UserInfo.username }}
+          </h2>
+          <i class="el-icon-arrow-down el-icon--right"></i>
+        </span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item command="home">个人设置</el-dropdown-item>
+          <el-dropdown-item command="logout">安全退出</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </div>
+  </div>
 </template>
 
 <script>
-export default {}
+import loginApi from '../../api/login'
+export default {
+  data() {
+    return {
+      userInfo: ''
+    }
+  },
+  methods: {
+    handleCommand(commad) {
+      switch (commad) {
+        case 'logout':
+          this.handleLogout()
+          break
+      }
+    },
+    async handleLogout() {
+      this.$confirm('您确定要退出系统吗?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning',
+        center: true
+      })
+        .then(() => {
+          this.$store.dispatch('user/logout')
+          this.$notify({
+            title: '提示',
+            message: '正在退出...',
+            type: 'success'
+          })
+          const res = loginApi.logout()
+          this.$router.push('/login')
+          console.log(res)
+        })
+        .catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消退出'
+          })
+        })
+    }
+  }
+}
 </script>
 
-<style lang="sass" scoped></style>
+<style scoped>
+* {
+  padding: 0;
+  margin: 0;
+}
+.box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.el-dropdown-link {
+  display: flex;
+  align-items: center;
+}
+</style>
