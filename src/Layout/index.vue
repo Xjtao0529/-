@@ -5,12 +5,16 @@
     </el-aside>
     <el-container>
       <el-header><Header></Header></el-header>
-      <el-main><Main></Main></el-main>
+      <el-main>
+        <Breadcrumb></Breadcrumb>
+        <Main></Main>
+      </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import Breadcrumb from '../components/Breadcrumb.vue'
 import Aside from './Aside'
 import Header from './Header'
 import Main from './Main'
@@ -18,7 +22,8 @@ export default {
   components: {
     Aside,
     Header,
-    Main
+    Main,
+    Breadcrumb
   }
 }
 </script>

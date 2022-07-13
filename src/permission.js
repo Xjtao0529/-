@@ -18,7 +18,9 @@ router.beforeEach(async (to, from, next) => {
           filterRoutes.forEach((item) => {
             router.addRoute(item)
           })
-          // return next(to.path)
+          return next(to.path)
+        } else {
+          next()
         }
       }
       next()

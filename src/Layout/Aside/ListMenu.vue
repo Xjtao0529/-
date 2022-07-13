@@ -24,13 +24,10 @@ export default {
   components: { ItemMenu },
   data() {
     return {
-      // List: this.$router.getRoutes(),
       menuLists: this.$store.getters.menuList
     }
   },
-  created() {
-    console.log(this.menuLists)
-  },
+  created() {},
   computed: {
     menuList() {
       const data = rmeoveChildren(this.menuLists)

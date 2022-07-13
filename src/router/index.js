@@ -9,15 +9,24 @@ export const publicRoutes = [
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/login')
+    component: () => import('../views/login'),
+    children: []
   },
   {
     path: '/',
-    meta: {
-      icon: 's-home',
-      title: '控制台'
-    },
-    component: () => import('../Layout')
+    name: 'layout',
+    component: () => import('../Layout'),
+    children: [
+      {
+        path: '/system',
+        name: 'system',
+        component: () => import('../views/console/index.vue'),
+        meta: {
+          title: '控制台',
+          icon: 'el-icon-s-home'
+        }
+      }
+    ]
   },
   {
     path: '/404',

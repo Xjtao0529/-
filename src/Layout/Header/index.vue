@@ -1,6 +1,9 @@
 <template>
   <div class="box">
-    <div class="left">left</div>
+    <div class="left">
+      <i class="el-icon-s-fold"></i>
+      <tags-view></tags-view>
+    </div>
     <div class="right">
       <el-dropdown trigger="click" @command="handleCommand">
         <span class="el-dropdown-link">
@@ -24,7 +27,11 @@
 
 <script>
 import loginApi from '../../api/login'
+import TagsView from '../../components/TagsView.vue'
 export default {
+  components: {
+    TagsView
+  },
   data() {
     return {
       userInfo: ''
@@ -78,6 +85,15 @@ export default {
   align-items: center;
 }
 .el-dropdown-link {
+  display: flex;
+  align-items: center;
+}
+.el-icon-s-fold {
+  font-size: 25px;
+  color: #fff;
+  margin: 0 10px;
+}
+.left {
   display: flex;
   align-items: center;
 }
