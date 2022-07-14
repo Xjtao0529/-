@@ -1,5 +1,5 @@
 <template>
-  <div class="box">
+  <div>
     <list-menu></list-menu>
   </div>
 </template>

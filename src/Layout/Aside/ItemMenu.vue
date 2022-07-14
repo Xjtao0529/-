@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <fragment>
     <template v-if="!menu.children">
       <el-menu-item :index="menu.path">
         <i :class="'el-icon-' + menu.icon"></i>
@@ -19,7 +19,7 @@
         ></item-menu>
       </el-submenu>
     </template>
-  </div>
+  </fragment>
 </template>
 <script>
 export default {

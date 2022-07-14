@@ -1,14 +1,22 @@
 <template>
   <div class="box">
     <div class="left">
-      <i class="el-icon-s-fold"></i>
+      <i
+        class="el-icon-s-fold"
+        @click="$store.commit('tagsview/setisCollspac')"
+      ></i>
       <tags-view></tags-view>
     </div>
     <div class="right">
+      <i class="el-icon-rank"></i>
+      <i
+        class="el-icon-circle-close"
+        @click="$store.commit('tagsview/deleteAll')"
+      ></i>
       <el-dropdown trigger="click" @command="handleCommand">
         <span class="el-dropdown-link">
           <el-avatar
-            :size="30"
+            :size="40"
             :src="$store.getters.UserInfo.avatar"
           ></el-avatar>
           <h2 style="color: #fff; margin: 0 5px">
@@ -94,6 +102,19 @@ export default {
   margin: 0 10px;
 }
 .left {
+  display: flex;
+  align-items: center;
+}
+.el-icon-circle-close {
+  color: #fff;
+  font-size: 30px;
+  margin: 0 15px;
+}
+.el-icon-rank {
+  color: #fff;
+  font-size: 30px;
+}
+.right {
   display: flex;
   align-items: center;
 }

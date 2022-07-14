@@ -1,7 +1,6 @@
 <template>
   <div>
     <router-view> </router-view>
-
   </div>
 </template>
 
@@ -9,4 +8,4 @@
 export default {}
 </script>
 
-<style lang="sass" scoped></style>
+<style scoped></style>

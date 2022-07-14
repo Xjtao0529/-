@@ -4,7 +4,7 @@
       v-for="(item, index) in tags"
       :key="index"
       :closable="item.path !== '/system'"
-      :type="$route.path === item.path ? '' : 'success'"
+      :type="$route.path === item.path ? 'warning' : 'success'"
       @click="addTags(item)"
       @close="delTags(item, index)"
     >

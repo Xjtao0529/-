@@ -1,11 +1,14 @@
 <template>
-  <div class="box">
+  <div>
     <el-menu
       default-active="2"
+      :style="{ width: $store.getters.isCollspac ? '64px' : '200px' }"
       class="el-menu-vertical-demo"
       background-color="#222d32"
       text-color="#fff"
       active-text-color="#ffd04b"
+      :collapse="$store.getters.isCollspac"
+      :collapse-transition="true"
       router
     >
       <item-menu
